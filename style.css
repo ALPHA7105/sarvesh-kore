@@ -5,6 +5,14 @@
     box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  padding: 6rem 2rem;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     color: #c5c6c7;
@@ -51,96 +59,36 @@ header ul a:hover {
     color: #66fcf1;
 }
 
-/* Hero Section with Animated Stars */
-#hero {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    overflow: hidden;
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 0 2rem;
 }
-
-#hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, #0b0c10, #1f2833);
-    z-index: -2;
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4rem;
+  color: #66fcf1;
 }
-
-/* Starfield layers */
-.stars, .stars2, .stars3 {
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
-    background: transparent;
-    z-index: -1;
+.hero-subtitle {
+  font-size: 1.4rem;
+  max-width: 600px;
 }
-
-.stars::after,
-.stars2::after,
-.stars3::after {
-    content: "";
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    background: white;
-    border-radius: 50%;
-    /* generate hundreds of stars */
-    box-shadow:
-        10px 20px white, 30px 50px white, 70px 120px white, 200px 400px white,
-        500px 800px white, 800px 600px white, 900px 300px white, 1200px 500px white,
-        1500px 1000px white, 1600px 1400px white, 1800px 1100px white, 2000px 1500px white,
-        50px 1500px white, 400px 900px white, 600px 200px white, 750px 1300px white,
-        1100px 400px white, 1400px 700px white, 1700px 200px white, 1900px 800px white,
-        2100px 1300px white, 2300px 500px white, 2500px 100px white, 2700px 900px white;
+.btn-main {
+  background: #66fcf1;
+  color: #0b0c10;
+  padding: 0.8rem 2rem;
+  border-radius: 999px;
+  font-weight: bold;
+  transition: 0.3s;
 }
-
-/* animate stars */
-.stars { animation: moveStars 200s linear infinite; }
-.stars2 { animation: moveStars 150s linear infinite reverse; }
-.stars3 { animation: moveStars 100s linear infinite; }
-
-@keyframes moveStars {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(-1000px, -1000px); }
-}
-
-/* Hero Content */
-.hero-content {
-    position: relative;
-    z-index: 1;
-    color: #ffffff;
-}
-
-.hero-content h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto 2rem auto;
-}
-
-.btn {
-    padding: 0.8rem 2rem;
-    background: #66fcf1;
-    color: #0b0c10;
-    border-radius: 50px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: #45a29e;
-    transform: translateY(-3px);
+.btn-main:hover {
+  background: #45a29e;
+  transform: translateY(-3px);
 }
 
 /* Sections */
@@ -157,25 +105,20 @@ section h2 {
 }
 
 /* Projects */
-.project-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
 }
-
 .project-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid #45a29e;
-    padding: 2rem;
-    border-radius: 12px;
-    width: 300px;
-    transition: 0.3s;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 1.8rem;
+  transition: 0.3s;
 }
-
 .project-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 10px 20px rgba(102,252,241,0.2);
+  transform: scale(1.04);
+  box-shadow: 0 10px 20px rgba(102,252,241,0.2);
 }
 
 /* Footer */
