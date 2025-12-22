@@ -18,14 +18,20 @@ body {
   box-shadow: 0 0 15px rgba(102,252,241,0.4); /* subtle glow */
 }
 
+header nav {
+  display: flex;
+  justify-content: space-between; /* keeps links on the right */
+  align-items: center;
+}
+
 header nav .logo {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.5rem; /* smaller gap, keeps name next to pic */
 }
 
 .nav-pfp {
-  width: 40px;          /* navbar-friendly size */
+  width: 40px;
   height: 40px;
   border-radius: 50%;
   border: 2px solid #66fcf1;
