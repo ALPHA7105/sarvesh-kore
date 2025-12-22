@@ -117,13 +117,6 @@ section {
   text-align: center;
   position: relative;
 }
-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(11,12,16,0.95), rgba(20,25,35,0.95));
-  z-index: -1;
-}
 
 section h2 {
   font-family: 'Orbitron', sans-serif;
