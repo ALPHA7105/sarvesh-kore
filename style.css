@@ -12,6 +12,26 @@ body {
     scroll-behavior: smooth;
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: -1;
+    box-shadow:
+      100px 200px white,
+      300px 500px white,
+      700px 300px white,
+      900px 800px white;
+    animation: twinkle 5s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
 a {
     text-decoration: none;
     color: inherit;
