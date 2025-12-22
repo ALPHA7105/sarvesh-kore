@@ -47,6 +47,27 @@ header nav .logo span {
   object-fit: cover;
 }
 
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none; /* removes underline */
+  color: #66fcf1;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+}
+
+.nav-logo img.nav-pfp {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nav-logo:hover {
+  color: #ffffff; /* optional: subtle hover effect */
+}
+
 /* ---------------- Navigation ---------------- */
 header {
   position: fixed;
