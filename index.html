@@ -73,25 +73,25 @@
   <p>&copy; 2025 Sarvesh Kore | Inspired by the Universe</p>
 </footer>
 
-<!-- ---------------- JS for Stars and Floating Shapes ---------------- -->
+<!-- ---------------- JS for Stars + Shapes + Particles ---------------- -->
 <script>
-// ---------- Stars (hero only) ----------
-const canvas = document.getElementById('starfield');
-const ctx = canvas.getContext('2d');
+// ---------- Hero Stars ----------
+const starCanvas = document.getElementById('starfield');
+const sctx = starCanvas.getContext('2d');
 let stars = [];
 const numStars = 300;
 
 function resizeStarCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  starCanvas.width = window.innerWidth;
+  starCanvas.height = window.innerHeight;
 }
 window.addEventListener('resize', resizeStarCanvas);
 resizeStarCanvas();
 
 for (let i = 0; i < numStars; i++) {
   stars.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
+    x: Math.random() * starCanvas.width,
+    y: Math.random() * starCanvas.height,
     size: Math.random() * 2,
     speed: Math.random() * 0.5 + 0.1,
     alpha: Math.random()
@@ -99,76 +99,135 @@ for (let i = 0; i < numStars; i++) {
 }
 
 function drawStars() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = '#0b0c10';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+  sctx.clearRect(0,0,starCanvas.width, starCanvas.height);
+  sctx.fillStyle = '#0b0c10';
+  sctx.fillRect(0,0, starCanvas.width, starCanvas.height);
+  
   stars.forEach(star => {
-    star.alpha += (Math.random() - 0.5) * 0.05;
-    if (star.alpha < 0.2) star.alpha = 0.2;
-    if (star.alpha > 1) star.alpha = 1;
+    star.alpha += (Math.random()-0.5)*0.05;
+    if(star.alpha < 0.2) star.alpha = 0.2;
+    if(star.alpha > 1) star.alpha = 1;
 
-    ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
-    ctx.beginPath();
-    ctx.arc(star.x, star.y, star.size, 0, Math.PI*2);
-    ctx.fill();
+    sctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
+    sctx.beginPath();
+    sctx.arc(star.x, star.y, star.size,0,Math.PI*2);
+    sctx.fill();
 
     star.y += star.speed;
-    if (star.y > canvas.height) star.y = 0;
+    if(star.y > starCanvas.height) star.y = 0;
   });
 }
 
-// ---------- Floating Shapes (whole page) ----------
-const shapesCanvas = document.getElementById('shapes');
-const sctx = shapesCanvas.getContext('2d');
+// ---------- Background Shapes + Particle Trails + Light Glows ----------
+const bgCanvas = document.getElementById('backgroundCanvas');
+const bctx = bgCanvas.getContext('2d');
+
 let shapes = [];
 const numShapes = 40;
+let particles = [];
+const numParticles = 80;
+let glows = [];
+const numGlows = 15;
 
-function resizeShapesCanvas() {
-  shapesCanvas.width = window.innerWidth;
-  shapesCanvas.height = window.innerHeight;
+function resizeBGCanvas(){
+  bgCanvas.width = window.innerWidth;
+  bgCanvas.height = window.innerHeight;
 }
-window.addEventListener('resize', resizeShapesCanvas);
-resizeShapesCanvas();
+window.addEventListener('resize', resizeBGCanvas);
+resizeBGCanvas();
 
-for (let i = 0; i < numShapes; i++) {
+// Shapes
+for(let i=0;i<numShapes;i++){
   shapes.push({
-    x: Math.random() * shapesCanvas.width,
-    y: Math.random() * shapesCanvas.height,
-    size: Math.random() * 60 + 20,
-    speed: Math.random() * 0.2 + 0.05,
-    type: Math.random() > 0.5 ? 'circle' : 'triangle',
-    alpha: Math.random() * 0.3 + 0.05
+    x: Math.random()*bgCanvas.width,
+    y: Math.random()*bgCanvas.height,
+    size: Math.random()*60+20,
+    speed: Math.random()*0.2+0.05,
+    type: Math.random()>0.5?'circle':'triangle',
+    alpha: Math.random()*0.3+0.05
+  });
+}
+// Particles
+for(let i=0;i<numParticles;i++){
+  particles.push({
+    x: Math.random()*bgCanvas.width,
+    y: Math.random()*bgCanvas.height,
+    size: Math.random()*3+1,
+    speedX: (Math.random()-0.5)*0.2,
+    speedY: (Math.random()-0.5)*0.2,
+    alpha: Math.random()*0.5+0.1
+  });
+}
+// Light glows
+for(let i=0;i<numGlows;i++){
+  glows.push({
+    x: Math.random()*bgCanvas.width,
+    y: Math.random()*bgCanvas.height,
+    radius: Math.random()*100+50,
+    speedX: (Math.random()-0.5)*0.05,
+    speedY: (Math.random()-0.5)*0.05,
+    alpha: Math.random()*0.2+0.05
   });
 }
 
-function drawShapes() {
-  sctx.clearRect(0, 0, shapesCanvas.width, shapesCanvas.height);
+function drawBG(){
+  bctx.clearRect(0,0,bgCanvas.width,bgCanvas.height);
 
-  shapes.forEach(shape => {
-    sctx.fillStyle = `rgba(102,252,241,${shape.alpha})`;
-    if (shape.type === 'circle') {
-      sctx.beginPath();
-      sctx.arc(shape.x, shape.y, shape.size/2, 0, Math.PI*2);
-      sctx.fill();
-    } else {
-      sctx.beginPath();
-      sctx.moveTo(shape.x, shape.y - shape.size/2);
-      sctx.lineTo(shape.x - shape.size/2, shape.y + shape.size/2);
-      sctx.lineTo(shape.x + shape.size/2, shape.y + shape.size/2);
-      sctx.closePath();
-      sctx.fill();
+  // Shapes
+  shapes.forEach(s=>{
+    bctx.fillStyle = `rgba(102,252,241,${s.alpha})`;
+    if(s.type==='circle'){
+      bctx.beginPath();
+      bctx.arc(s.x,s.y,s.size/2,0,Math.PI*2);
+      bctx.fill();
+    } else{
+      bctx.beginPath();
+      bctx.moveTo(s.x,s.y-s.size/2);
+      bctx.lineTo(s.x-s.size/2,s.y+s.size/2);
+      bctx.lineTo(s.x+s.size/2,s.y+s.size/2);
+      bctx.closePath();
+      bctx.fill();
     }
+    s.y += s.speed;
+    if(s.y>bgCanvas.height+s.size) s.y=-s.size;
+  });
 
-    shape.y += shape.speed;
-    if (shape.y > shapesCanvas.height + shape.size) shape.y = -shape.size;
+  // Particles
+  particles.forEach(p=>{
+    bctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+    bctx.beginPath();
+    bctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    bctx.fill();
+    p.x += p.speedX;
+    p.y += p.speedY;
+    if(p.x>bgCanvas.width) p.x=0;
+    if(p.x<0) p.x=bgCanvas.width;
+    if(p.y>bgCanvas.height) p.y=0;
+    if(p.y<0) p.y=bgCanvas.height;
+  });
+
+  // Glows
+  glows.forEach(g=>{
+    let gradient = bctx.createRadialGradient(g.x,g.y,0,g.x,g.y,g.radius);
+    gradient.addColorStop(0, `rgba(102,252,241,${g.alpha})`);
+    gradient.addColorStop(1, 'rgba(102,252,241,0)');
+    bctx.fillStyle = gradient;
+    bctx.beginPath();
+    bctx.arc(g.x,g.y,g.radius,0,Math.PI*2);
+    bctx.fill();
+    g.x += g.speedX;
+    g.y += g.speedY;
+    if(g.x>bgCanvas.width) g.x=0;
+    if(g.x<0) g.x=bgCanvas.width;
+    if(g.y>bgCanvas.height) g.y=0;
+    if(g.y<0) g.y=bgCanvas.height;
   });
 }
 
-// ---------- Animate ----------
-function animate() {
+// ---------- Animate All ----------
+function animate(){
   drawStars();
-  drawShapes();
+  drawBG();
   requestAnimationFrame(animate);
 }
 animate();
