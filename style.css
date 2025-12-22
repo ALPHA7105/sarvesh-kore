@@ -50,11 +50,15 @@ header nav .logo span {
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  text-decoration: none; /* removes underline */
+  gap: 0.5rem;
   color: #66fcf1;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
+  text-decoration: none; /* remove underline */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-logo:hover {
+  color: #ffffff;   /* subtle color change */
+  transform: scale(1.05); /* slight scale for effect */
 }
 
 .nav-logo img.nav-pfp {
@@ -62,10 +66,6 @@ header nav .logo span {
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-}
-
-.nav-logo:hover {
-  color: #ffffff; /* optional: subtle hover effect */
 }
 
 /* ---------------- Navigation ---------------- */
