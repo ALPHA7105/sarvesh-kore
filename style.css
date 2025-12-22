@@ -130,6 +130,17 @@ section p {
   color: #c5c6c7;
 }
 
+/* ---------------- Abouts ---------------- */
+
+#about p {
+  max-width: 900px; /* was 700px */
+  margin: 0 auto 2rem auto;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #c5c6c7;
+  text-align: center;
+}
+
 /* ---------------- Projects ---------------- */
 .project-grid {
   display: grid;
