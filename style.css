@@ -20,14 +20,22 @@ body {
 
 header nav {
   display: flex;
-  justify-content: space-between; /* keeps links on the right */
+  justify-content: space-between; /* nav links stay on right */
   align-items: center;
+  gap: 2rem;
 }
 
 header nav .logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* smaller gap, keeps name next to pic */
+  gap: 0.5rem; /* space between pic and name */
+}
+
+header nav .logo span {
+  font-family: 'Orbitron', sans-serif;
+  color: #66fcf1;
+  font-size: 1.5rem;
+  white-space: nowrap; /* keeps text on same line as pic */
 }
 
 .nav-pfp {
@@ -36,6 +44,7 @@ header nav .logo {
   border-radius: 50%;
   border: 2px solid #66fcf1;
   box-shadow: 0 0 8px rgba(102,252,241,0.4);
+  object-fit: cover;
 }
 
 /* ---------------- Navigation ---------------- */
