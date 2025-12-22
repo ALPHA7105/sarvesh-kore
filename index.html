@@ -59,6 +59,7 @@
   <p>&copy; 2025 Sarvesh Kore | Inspired by the Universe</p>
 </footer>
 
+
 <script>
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
@@ -84,7 +85,7 @@ for (let i = 0; i < numStars; i++) {
 }
 
 function animate() {
-    ctx.fillStyle = '#0b0c10';
+    ctx.fillStyle = '#0b0c10'; // background
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.fillStyle = '#ffffff';
@@ -93,9 +94,9 @@ function animate() {
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fill();
 
-        // move star
-        star.y -= star.speed;
-        if (star.y < 0) star.y = canvas.height;
+        // move star downward for forward motion
+        star.y += star.speed;
+        if (star.y > canvas.height) star.y = 0; // wrap to top
     }
 
     requestAnimationFrame(animate);
@@ -103,6 +104,7 @@ function animate() {
 
 animate();
 </script>
+
 
   
 </body>
