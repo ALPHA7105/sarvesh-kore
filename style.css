@@ -1,88 +1,93 @@
 /* Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-section {
-  padding: 6rem 2rem;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-    font-family: 'Roboto', sans-serif;
-    color: #c5c6c7;
-    overflow-x: hidden;
-    min-height: 100vh;
-    background: #0b0c10;
+  font-family: 'Roboto', sans-serif;
+  color: #c5c6c7;
+  overflow-x: hidden;
+  background: #0b0c10;
+  scroll-behavior: smooth;
 }
 
 /* Navigation */
 header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    background: rgba(11,12,16,0.8);
-    backdrop-filter: blur(6px);
-    z-index: 100;
-    padding: 1rem 2rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: rgba(11,12,16,0.8);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  padding: 1rem 2rem;
 }
+header nav { display: flex; justify-content: space-between; align-items: center; }
+header h1 { font-family: 'Orbitron', sans-serif; color: #66fcf1; letter-spacing: 1px; }
+header ul { list-style: none; display: flex; gap: 2rem; }
+header ul a { color: #c5c6c7; transition: 0.3s; }
+header ul a:hover { color: #66fcf1; }
 
-header nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header h1 {
-    font-family: 'Orbitron', sans-serif;
-    color: #66fcf1;
-    letter-spacing: 1px;
-}
-
-header ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-}
-
-header ul a {
-    color: #c5c6c7;
-    transition: 0.3s;
-}
-
-header ul a:hover {
-    color: #66fcf1;
-}
-
-.hero-section {
-  min-height: 100vh;
+/* Hero Section */
+#hero {
+  position: relative;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: 1rem;
-  padding: 0 2rem;
+  overflow: hidden;
 }
-.hero-title {
+
+/* Star layers */
+.stars, .stars2, .stars3 {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: transparent;
+  z-index: -1;
+}
+.stars::after,
+.stars2::after,
+.stars3::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: white;
+  border-radius: 50%;
+  box-shadow:
+    100px 200px white, 200px 400px white, 300px 600px white, 400px 800px white,
+    500px 1000px white, 600px 1200px white, 700px 1400px white, 800px 1600px white,
+    900px 1800px white, 1000px 2000px white, 1100px 2200px white, 1200px 2400px white;
+}
+
+/* Star animations */
+.stars { animation: moveStars 200s linear infinite; }
+.stars2 { animation: moveStars 150s linear infinite reverse; }
+.stars3 { animation: moveStars 100s linear infinite; }
+@keyframes moveStars {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-1000px, -1000px); }
+}
+
+/* Hero content */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 0 1rem;
+}
+.hero-content h2 {
   font-family: 'Orbitron', sans-serif;
-  font-size: 4rem;
+  font-size: 3rem;
   color: #66fcf1;
+  margin-bottom: 1rem;
 }
-.hero-subtitle {
-  font-size: 1.4rem;
-  max-width: 600px;
-}
+.hero-content p { font-size: 1.2rem; margin-bottom: 2rem; }
 .btn-main {
+  padding: 0.8rem 2rem;
   background: #66fcf1;
   color: #0b0c10;
-  padding: 0.8rem 2rem;
-  border-radius: 999px;
+  border-radius: 50px;
   font-weight: bold;
   transition: 0.3s;
 }
@@ -92,24 +97,11 @@ header ul a:hover {
 }
 
 /* Sections */
-section {
-    padding: 6rem 2rem;
-    text-align: center;
-}
-
-section h2 {
-    font-family: 'Orbitron', sans-serif;
-    color: #45a29e;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-}
+section { padding: 6rem 2rem; text-align: center; }
+section h2 { font-family: 'Orbitron', sans-serif; color: #45a29e; font-size: 2.5rem; margin-bottom: 2rem; }
 
 /* Projects */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
+.project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
 .project-card {
   background: rgba(255,255,255,0.05);
   border-radius: 12px;
@@ -122,8 +114,4 @@ section h2 {
 }
 
 /* Footer */
-footer {
-    padding: 2rem;
-    background: #0b0c10;
-    color: #c5c6c7;
-}
+footer { padding: 2rem; background: #0b0c10; color: #c5c6c7; }
