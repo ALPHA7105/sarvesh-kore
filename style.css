@@ -70,7 +70,7 @@ header ul a:hover {
     z-index: -2;
 }
 
-/* Star layers */
+/* Starfield layers */
 .stars, .stars2, .stars3 {
     position: absolute;
     width: 200%;
@@ -81,33 +81,33 @@ header ul a:hover {
     z-index: -1;
 }
 
-.stars::after, .stars2::after, .stars3::after {
-    content: '';
+.stars::after,
+.stars2::after,
+.stars3::after {
+    content: "";
     position: absolute;
-    width: 2px;
-    height: 2px;
+    width: 1px;
+    height: 1px;
     background: white;
     border-radius: 50%;
-    box-shadow: 
-        500px 800px white,
-        1200px 400px white,
-        800px 1200px white,
-        200px 600px white,
-        1500px 1000px white,
-        100px 1400px white,
-        900px 300px white,
-        1600px 500px white,
-        400px 1500px white;
+    /* generate hundreds of stars */
+    box-shadow:
+        10px 20px white, 30px 50px white, 70px 120px white, 200px 400px white,
+        500px 800px white, 800px 600px white, 900px 300px white, 1200px 500px white,
+        1500px 1000px white, 1600px 1400px white, 1800px 1100px white, 2000px 1500px white,
+        50px 1500px white, 400px 900px white, 600px 200px white, 750px 1300px white,
+        1100px 400px white, 1400px 700px white, 1700px 200px white, 1900px 800px white,
+        2100px 1300px white, 2300px 500px white, 2500px 100px white, 2700px 900px white;
 }
 
-/* Animations for stars */
+/* animate stars */
 .stars { animation: moveStars 200s linear infinite; }
 .stars2 { animation: moveStars 150s linear infinite reverse; }
 .stars3 { animation: moveStars 100s linear infinite; }
 
 @keyframes moveStars {
     0% { transform: translate(0, 0); }
-    100% { transform: translate(-500px, -500px); }
+    100% { transform: translate(-1000px, -1000px); }
 }
 
 /* Hero Content */
