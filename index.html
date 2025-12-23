@@ -322,27 +322,33 @@ function animate(){
 }
 animate();
 
-  // Smooth scroll for 'Know More' button
-  const knowMoreBtn = document.querySelector('.btn-know-more');
-  if(knowMoreBtn){
-    knowMoreBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const target = document.querySelector('#about');
-      if(target){
-        target.scrollIntoView({ behavior: 'smooth' });
-        // Update URL temporarily (optional)
-        history.replaceState(null, '', '#about');
-      }
-    });
-  }
-
-  // On page load, scroll to top and remove any hash
-  window.addEventListener('load', () => {
-    window.scrollTo(0, 0);
-    if(window.location.hash){
-      history.replaceState(null, '', window.location.pathname + window.location.search);
+// Smooth scroll for 'Know More' button
+const knowMoreBtn = document.querySelector('.btn-know-more');
+if (knowMoreBtn) {
+  knowMoreBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector('#about');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+      // Remove hash after scrolling
+      setTimeout(() => {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }, 500); // 0.5s delay to allow smooth scroll
     }
   });
+}
+
+// On page load, always scroll to top
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+    // Clear hash if any
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }, 50); // small delay to ensure DOM is ready
+});
+
 </script>
 
 </body>
