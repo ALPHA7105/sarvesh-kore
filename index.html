@@ -322,26 +322,27 @@ function animate(){
 }
 animate();
 
-// Smooth scroll for 'Know More' button
 const btn = document.getElementById('knowMoreBtn');
 const about = document.getElementById('about');
 
 btn.addEventListener('click', (e) => {
   e.preventDefault();
+  
+  about.scrollIntoView({ behavior: 'smooth' });
 
-  about.scrollIntoView({
-    behavior: 'smooth'
-  });
-
-  // delay slightly so animation feels intentional
+  // Add the active class after a short delay for animation
   setTimeout(() => {
     about.classList.add('active');
   }, 300);
 });
 
-  window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-  };
+// On page load, scroll to top and clear any hash
+window.addEventListener('load', () => {
+  window.scrollTo(0, 0);
+  if(window.location.hash){
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+});
   
 </script>
 
