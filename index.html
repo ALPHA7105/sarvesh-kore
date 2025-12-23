@@ -329,26 +329,26 @@ if (knowMoreBtn) {
     e.preventDefault();
     const target = document.querySelector('#about');
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-      // Remove hash after scrolling
+      const top = target.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: 'smooth' });
+
+      // Remove hash AFTER a small delay (after scrolling)
       setTimeout(() => {
         history.replaceState(null, '', window.location.pathname + window.location.search);
-      }, 500); // 0.5s delay to allow smooth scroll
+      }, 600); // 0.6s delay for smooth scroll
     }
   });
 }
 
-// On page load, always scroll to top
+// On page load, scroll to top
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-    // Clear hash if any
-    if (window.location.hash) {
-      history.replaceState(null, '', window.location.pathname + window.location.search);
-    }
-  }, 50); // small delay to ensure DOM is ready
+  window.scrollTo(0, 0);
+  // Clear hash if any
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
 });
-
+  
 </script>
 
 </body>
