@@ -156,10 +156,10 @@ header ul a:hover { color: #66fcf1; }
 }
 .hero-tagline {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.8rem;
+  font-size: 1rem;
   color: #d1d1d1;
   margin-bottom: 1.5rem;
-  text-shadow: 0 0 10px #000;
+  /*text-shadow: 0 0 10px #000;*/
 }
 .btn-main {
   padding: 0.8rem 2rem;
