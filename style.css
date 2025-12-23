@@ -218,6 +218,15 @@ section p {
   color: #c5c6c7;
   text-align: center;
 }
+.quote {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: #aab2b8;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  opacity: 0.9;
+}
 
 /* ---------------- Projects ---------------- */
 .project-grid {
