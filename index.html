@@ -44,7 +44,7 @@
 </section>
 
 <!-- About Section -->
-<section id="about">
+<section id="about" class="reveal">
   <h2>About Me</h2>
   <img src="Sarvesh-pfp.png" alt="Sarvesh Kore" class="profile-pic">
   <p class="quote">
@@ -321,6 +321,22 @@ function animate(){
   requestAnimationFrame(animate);
 }
 animate();
+
+const btn = document.getElementById('knowMoreBtn');
+const about = document.getElementById('about');
+
+btn.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  about.scrollIntoView({
+    behavior: 'smooth'
+  });
+
+  // delay slightly so animation feels intentional
+  setTimeout(() => {
+    about.classList.add('active');
+  }, 300);
+});
 </script>
 
 </body>
