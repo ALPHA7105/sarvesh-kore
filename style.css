@@ -144,6 +144,23 @@ header ul a:hover { color: #66fcf1; }
   color: #d1d1d1;
   text-shadow: 0 0 10px #000;
 }
+.hero-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  color: #66fcf1;
+  margin-bottom: 0.6rem;
+  letter-spacing: 2px;
+  text-shadow:
+    0 0 20px rgba(102, 252, 241, 0.8),
+    0 0 40px rgba(69, 162, 158, 0.6);
+}
+.hero-tagline {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  color: #d1d1d1;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px #000;
+}
 .btn-main {
   padding: 0.8rem 2rem;
   background: linear-gradient(45deg, #66fcf1, #45a29e);
