@@ -323,31 +323,25 @@ function animate(){
 animate();
 
 // Smooth scroll for 'Know More' button
-const knowMoreBtn = document.querySelector('.btn-know-more');
-if (knowMoreBtn) {
-  knowMoreBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const target = document.querySelector('#about');
-    if (target) {
-      const top = target.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top, behavior: 'smooth' });
+const btn = document.getElementById('knowMoreBtn');
+const about = document.getElementById('about');
 
-      // Remove hash AFTER a small delay (after scrolling)
-      setTimeout(() => {
-        history.replaceState(null, '', window.location.pathname + window.location.search);
-      }, 600); // 0.6s delay for smooth scroll
-    }
+btn.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  about.scrollIntoView({
+    behavior: 'smooth'
   });
-}
 
-// On page load, scroll to top
-window.addEventListener('load', () => {
-  window.scrollTo(0, 0);
-  // Clear hash if any
-  if (window.location.hash) {
-    history.replaceState(null, '', window.location.pathname + window.location.search);
-  }
+  // delay slightly so animation feels intentional
+  setTimeout(() => {
+    about.classList.add('active');
+  }, 300);
 });
+
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  };
   
 </script>
 
