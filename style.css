@@ -227,7 +227,18 @@ section p {
   text-align: center;
   opacity: 0.9;
 }
+/* Initial hidden state */
+.reveal {
+  opacity: 0;
+  transform: translateY(-40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
 
+/* When revealed */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
 /* ---------------- Projects ---------------- */
 .project-grid {
   display: grid;
