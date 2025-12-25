@@ -523,6 +523,7 @@ footer {
     align-items: center;
     padding-top: 5rem; /* space from top */
     gap: 1.5rem;
+    z-index: 500; 
 
     opacity: 0;
     pointer-events: none;
@@ -554,3 +555,8 @@ footer {
     height: 100vh; /* make sure all canvases extend fully */
   }
 }
+
+
+#hero { position: relative; z-index: 1; }
+#starfield { z-index: -1; }
+#shapes, #particles { z-index: -2; }
