@@ -529,7 +529,7 @@ footer {
     pointer-events: none;
     transform: translateX(100%); /* slide from right */
     transition: transform 0.3s ease, opacity 0.3s ease;
-    z-index: 300; /* above hero and other layers */
+    z-index: 999; /* above hero and other layers */
   }
 
   .nav-links.active {
@@ -560,3 +560,7 @@ footer {
 #hero { position: relative; z-index: 1; }
 #starfield { z-index: -1; }
 #shapes, #particles { z-index: -2; }
+
+#hero, #starfield, #shapes, #particles {
+  pointer-events: none; /* always ignore pointer events */
+}
