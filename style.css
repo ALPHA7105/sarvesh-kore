@@ -7,6 +7,9 @@ body {
   background: #0b0c10;
   scroll-behavior: smooth;
 }
+html {
+  scroll-padding-top: 90px; /* height of your navbar */
+}
 
 /* ---------------- Navigation ---------------- */
 header {
