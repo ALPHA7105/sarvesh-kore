@@ -470,6 +470,10 @@ footer {
     background: #66fcf1;
     border-radius: 2px;
   }
+  
+  .menu-toggle:hover span {
+    background: #ffffff;
+  }
 
   .nav-links {
     position: absolute;
