@@ -538,3 +538,16 @@ footer {
     display: none; /* hide default horizontal links */
   }
 }
+
+
+@media (max-width: 768px) and (orientation: portrait) {
+  #hero {
+    height: 100vh; /* full viewport height */
+  }
+
+  #starfield,
+  #shapes,
+  #particles {
+    height: 100vh; /* make sure all canvases extend fully */
+  }
+}
