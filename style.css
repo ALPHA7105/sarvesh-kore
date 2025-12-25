@@ -252,7 +252,7 @@ section p {
 /* ---------------- Updates ---------------- */
 
 /* Christmas tree link styling */
-#updates .project-link {
+#updates .updates-link {
   text-decoration: none;      /* removes underline */
   font-size: 2.2rem;          /* makes the tree bigger */
   display: inline-block;      /* allows hover transforms */
@@ -260,7 +260,7 @@ section p {
 }
 
 /* Subtle hover effect (alive, not loud) */
-#updates .project-link:hover {
+#updates .updates-link:hover {
   transform: scale(1.15);
   opacity: 0.85;
 }
