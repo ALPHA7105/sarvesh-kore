@@ -15,13 +15,20 @@
 
 <header>
   <nav>
+    
     <div class="logo">
       <a href="#hero" class="nav-logo">
         <img src="Sarvesh-pfp.png" alt="Sarvesh Profile Picture" class="nav-pfp">
         <span>Sarvesh Kore</span>
       </a>
     </div>
-    <ul>
+    <!-- Mobile Menu Button -->
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul class="nav-links" id="navLinks>
       <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#updates">Updates</a></li>
@@ -359,6 +366,15 @@ window.addEventListener('load', () => {
     history.replaceState(null, '', window.location.pathname + window.location.search);
   }
 });
+
+// ---------- Mobile Nav Toggle ----------
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+
   
 </script>
 
