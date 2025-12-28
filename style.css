@@ -269,10 +269,9 @@ section p {
 
 /* ---------------- Updates ---------------- */
 
-/* Christmas tree link styling */
 #updates .updates-link {
   text-decoration: none;      /* removes underline */
-  font-size: 7rem;          /* makes the tree bigger */
+  font-size: 2rem;          /* makes the tree bigger */
   display: inline-block;      /* allows hover transforms */
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
