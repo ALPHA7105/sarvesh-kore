@@ -269,18 +269,53 @@ section p {
 
 /* ---------------- Updates ---------------- */
 
-#updates .updates-link {
-  color: #c5c6c7
-  text-decoration: none;      /* removes underline */
-  font-size: 2rem;          /* makes the tree bigger */
-  display: inline-block;      /* allows hover transforms */
-  transition: transform 0.2s ease, opacity 0.2s ease;
+.article-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 720px;
+  margin: 2rem auto;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid #45a29e;
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Subtle hover effect (alive, not loud) */
-#updates .updates-link:hover {
-  transform: scale(1.15);
-  opacity: 0.85;
+.article-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(102,252,241,0.25);
+}
+
+.article-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.article-content {
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.article-content h3 {
+  color: #66fcf1;
+  margin-bottom: 0.6rem;
+  font-size: 1.4rem;
+}
+
+.article-content p {
+  font-size: 1rem;
+  color: #c5c6c7;
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+
+.article-content span {
+  color: #66fcf1;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
 /* ---------------- Projects ---------------- */
@@ -460,9 +495,13 @@ footer {
     font-size: 0.7rem;
   }
 
-  /* ---------- Updates (Christmas tree) ---------- */
-  #updates .updates-link {
-    font-size: 3.2rem; /* 7rem was INSANE on mobile */
+  /* ---------- Updates ---------- */
+  .article-card img {
+    height: 180px;
+  }
+
+  .article-content h3 {
+    font-size: 1.15rem;
   }
 
   /* ---------- Footer ---------- */
