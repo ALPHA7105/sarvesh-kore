@@ -270,6 +270,7 @@ section p {
 /* ---------------- Updates ---------------- */
 
 #updates .updates-link {
+  color: #c5c6c7
   text-decoration: none;      /* removes underline */
   font-size: 2rem;          /* makes the tree bigger */
   display: inline-block;      /* allows hover transforms */
