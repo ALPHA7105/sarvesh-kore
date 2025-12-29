@@ -346,6 +346,8 @@ section p {
 
 
 .see-more-btn {
+  margin-top: 4rem;
+  display: inline-block;
   padding: 0.8rem 2rem;
   background: linear-gradient(45deg, #66fcf1, #45a29e);
   color: #0b0c10;
