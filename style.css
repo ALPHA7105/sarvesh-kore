@@ -345,6 +345,29 @@ section p {
 }
 
 
+.see-more-container {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.see-more-btn {
+  padding: 0.9rem 2.2rem;
+  font-size: 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.see-more-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+
 /* ---------------- Contact ---------------- */
 #contact a.btn-main {
   background: linear-gradient(135deg, #ff66c4, #66fcf1);
