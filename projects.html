@@ -2,33 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Articles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | Sarvesh</title>
 
   <!-- SAME CSS -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- SAME PARTICLES / SHAPES JS -->
-  <script defer src="particles.js"></script>
+  <!-- Optional meta -->
+  <meta name="description" content="All articles and projects by Sarvesh." />
 </head>
+
 <body>
 
-  <!-- Your existing background shapes / canvas -->
+  <!-- BACKGROUND (same as index.html) -->
+  <canvas id="starfield"></canvas>
+  <canvas id="shapes"></canvas>
   <canvas id="particles"></canvas>
 
-  <section class="projects-section">
-    <h1>All Articles</h1>
+  <!-- HEADER (reuse navbar exactly) -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Sarvesh</a>
 
-    <div class="projects-grid">
-      <!-- Article Card 1 -->
-      <div class="project-card">
-        <h3>The Law That Builds the Universe: Entropy</h3>
-        <p>Physics · Cosmology · Philosophy</p>
-        <a href="link-to-article" class="card-link">Read</a>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html#hero">Home</a></li>
+        <li><a href="index.html#projects">Featured</a></li>
+        <li><a href="projects.html">All Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <section id="projects">
+      <h2>All Articles & Projects</h2>
+      <p class="section-intro">
+        A complete collection of my writings across physics, cosmology, and ideas.
+      </p>
+
+      <div class="project-grid">
+
+        <!-- Article 1 -->
+        <div class="project-card">
+          <h3>The Law That Builds the Universe: Entropy</h3>
+          <p>
+            An exploration of entropy as the principle shaping time, structure,
+            and the universe itself.
+          </p>
+          <a href="https://medium.com/@sarveshkore/the-law-that-builds-the-universe-entropy-f940f60466c7"
+             target="_blank"
+             class="project-link">
+            → Read on Medium
+          </a>
+        </div>
+
+        <!-- Article 2 -->
+        <div class="project-card">
+          <h3>Is Our Universe Really An Isolated System?</h3>
+          <p>
+            Examining whether global energy conservation holds in an expanding universe.
+          </p>
+          <a href="https://medium.com/@sarveshkore/is-our-universe-really-an-isolated-system-effea1a03c6a"
+             target="_blank"
+             class="project-link">
+            → Read on Medium
+          </a>
+        </div>
+
+        <!-- Add the remaining 4 articles the same way -->
+
       </div>
+    </section>
 
-      <!-- Repeat for all 6 articles -->
-    </div>
-  </section>
+  </main>
 
+  <!-- SAME JS -->
+  <script src="script.js"></script>
 </body>
 </html>
