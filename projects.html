@@ -212,7 +212,40 @@ window.onbeforeunload = () => window.scrollTo(0,0);
 // ===== Hero: Causal Grid =====
 const gridCanvas = document.getElementById('causalGrid');
 const gctx = gridCanvas.getContext('2d');
-// ... Add causal grid animation code here ...
+let gridLines = [];
+const numGridLines = 20;
+
+// Initialize lines
+for(let i=0;i<numGridLines;i++){
+  gridLines.push({
+    x: Math.random()*gridCanvas.width,
+    y: Math.random()*gridCanvas.height,
+    speed: 0.5 + Math.random()*0.5
+  });
+}
+
+function drawCausalGrid(){
+  gctx.clearRect(0,0,gridCanvas.width,gridCanvas.height);
+  gctx.strokeStyle = '#66fcf1';
+  gctx.lineWidth = 1;
+
+  gridLines.forEach(line=>{
+    gctx.beginPath();
+    gctx.moveTo(line.x, 0);
+    gctx.lineTo(line.x, gridCanvas.height);
+    gctx.stroke();
+
+    gctx.beginPath();
+    gctx.moveTo(0, line.y);
+    gctx.lineTo(gridCanvas.width, line.y);
+    gctx.stroke();
+
+    line.x += line.speed;
+    line.y += line.speed;
+    if(line.x>gridCanvas.width) line.x = 0;
+    if(line.y>gridCanvas.height) line.y = 0;
+  });
+}
 function resizeGridCanvas() { gridCanvas.width = window.innerWidth; gridCanvas.height = window.innerHeight; }
 window.addEventListener('resize', resizeGridCanvas);
 resizeGridCanvas();
@@ -220,7 +253,25 @@ resizeGridCanvas();
 // ===== Body: Signal Noise =====
 const noiseCanvas = document.getElementById('noise');
 const nctx = noiseCanvas.getContext('2d');
-// ... Add signal noise code here ...
+let noiseDots = [];
+const numDots = 150;
+
+for(let i=0;i<numDots;i++){
+  noiseDots.push({
+    x: Math.random()*noiseCanvas.width,
+    y: Math.random()*noiseCanvas.height,
+    alpha: Math.random()
+  });
+}
+
+function drawNoise(){
+  nctx.clearRect(0,0,noiseCanvas.width, noiseCanvas.height);
+  noiseDots.forEach(dot=>{
+    nctx.fillStyle = `rgba(102,252,241,${dot.alpha})`;
+    nctx.fillRect(dot.x,dot.y,2,2);
+    dot.alpha = 0.1 + Math.random()*0.5; // flickering effect
+  });
+}
 function resizeNoise() { noiseCanvas.width = window.innerWidth; noiseCanvas.height = window.innerHeight; }
 window.addEventListener('resize', resizeNoise);
 resizeNoise();
