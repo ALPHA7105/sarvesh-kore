@@ -129,6 +129,12 @@ header nav .logo span {
   overflow: hidden;
 }
 
+#starfield {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
 
 .hero-content {
   position: relative;
@@ -187,7 +193,7 @@ header nav .logo span {
 }
 
 /* ---------------- Floating Shapes & Particles ---------------- */
-#starfield, #shapes, #particles {
+#shapes, #particles {
   position: fixed;
   top: 0;
   left: 0;
