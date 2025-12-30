@@ -18,13 +18,22 @@
       pointer-events: none;
       z-index: -2;
     }
+    
+    /* Body background canvas */
+    #particlesBG {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;   /* behind everything */
+      pointer-events: none;
+    }
 
-    #causalGrid { z-index: 0; }
-    #particlesBG { z-index: -1; }
-    #causalGrid,
-    #gridParticles {
+    #causalGrid {
       position: absolute;
       inset: 0;
+      z-index: 0;        /* behind hero content */
       pointer-events: none;
     }
 
@@ -157,7 +166,6 @@
 <!-- Hero Section -->
 <section id="hero">
   <canvas id="causalGrid"></canvas>
-  <canvas id="gridParticles"></canvas>
   <div class="hero-content">
     <h1 class="hero-name">Sarvesh Kore</h1>
     <h2 class="hero-tagline">My Project Page</h2>
@@ -216,153 +224,147 @@
 const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
 menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
-document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
+document.querySelectorAll('.nav-links a').forEach(link => 
+  link.addEventListener('click', () => navLinks.classList.remove('active'))
+);
 
 // ===== Scroll to top on reload =====
 window.onbeforeunload = () => window.scrollTo(0,0);
 
-// ===== Hero: Subtle Causal Grid =====
-const canvas = document.getElementById('causalGrid');
-const ctx = canvas.getContext('2d');
 
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+/* ---------------- HERO: Grid + Massive Particles ---------------- */
+const heroCanvas = document.getElementById('causalGrid');
+const hctx = heroCanvas.getContext('2d');
+
+function resizeHeroCanvas() {
+  heroCanvas.width = window.innerWidth;
+  heroCanvas.height = window.innerHeight;
 }
-window.addEventListener('resize', resize);
-resize();
+window.addEventListener('resize', resizeHeroCanvas);
+resizeHeroCanvas();
 
 const spacing = 90;
 let offset = 0;
 
-// ===== Hero: Massive Particles =====
-
+// Massive particles
 const masses = [];
-
 for (let i = 0; i < 5; i++) {
   masses.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
+    x: Math.random() * heroCanvas.width,
+    y: Math.random() * heroCanvas.height,
     r: 4 + Math.random() * 3,
     driftX: (Math.random() - 0.5) * 0.1,
     driftY: (Math.random() - 0.5) * 0.1
   });
 }
 
-// ===== Hero: Draw warped spacetime grid =====
-
+// Warp function
 function warp(x, y) {
   let dx = 0, dy = 0;
-
   masses.forEach(m => {
     const dist = Math.hypot(x - m.x, y - m.y);
     const strength = Math.max(0, 120 - dist) / 120;
     dx += (x - m.x) * strength * 0.15;
     dy += (y - m.y) * strength * 0.15;
   });
-
   return { x: x + dx, y: y + dy };
 }
 
+// Draw grid
 function drawGrid() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.strokeStyle = 'rgba(102,252,241,0.12)';
-  ctx.lineWidth = 1;
+  hctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+  hctx.strokeStyle = 'rgba(102,252,241,0.12)';
+  hctx.lineWidth = 1;
 
-  for (let x = -spacing; x < canvas.width + spacing; x += spacing) {
-    ctx.beginPath();
-    for (let y = -spacing; y < canvas.height + spacing; y += 20) {
+  for (let x = -spacing; x < heroCanvas.width + spacing; x += spacing) {
+    hctx.beginPath();
+    for (let y = -spacing; y < heroCanvas.height + spacing; y += 20) {
       const p = warp(x + offset, y);
-      if (y === -spacing) ctx.moveTo(p.x, p.y);
-      else ctx.lineTo(p.x, p.y);
+      if (y === -spacing) hctx.moveTo(p.x, p.y);
+      else hctx.lineTo(p.x, p.y);
     }
-    ctx.stroke();
+    hctx.stroke();
   }
 
-  for (let y = -spacing; y < canvas.height + spacing; y += spacing) {
-    ctx.beginPath();
-    for (let x = -spacing; x < canvas.width + spacing; x += 20) {
+  for (let y = -spacing; y < heroCanvas.height + spacing; y += spacing) {
+    hctx.beginPath();
+    for (let x = -spacing; x < heroCanvas.width + spacing; x += 20) {
       const p = warp(x, y + offset);
-      if (x === -spacing) ctx.moveTo(p.x, p.y);
-      else ctx.lineTo(p.x, p.y);
+      if (x === -spacing) hctx.moveTo(p.x, p.y);
+      else hctx.lineTo(p.x, p.y);
     }
-    ctx.stroke();
+    hctx.stroke();
   }
 }
 
-// ===== Hero: Draw massive particles =====
-
+// Draw massive particles
 function drawMasses() {
   masses.forEach(m => {
-    ctx.fillStyle = 'rgba(102,252,241,0.8)';
-    ctx.beginPath();
-    ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
-    ctx.fill();
+    hctx.fillStyle = 'rgba(102,252,241,0.8)';
+    hctx.beginPath();
+    hctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+    hctx.fill();
 
     m.x += m.driftX;
     m.y += m.driftY;
 
-    if (m.x < 0 || m.x > canvas.width) m.driftX *= -1;
-    if (m.y < 0 || m.y > canvas.height) m.driftY *= -1;
+    if (m.x < 0 || m.x > heroCanvas.width) m.driftX *= -1;
+    if (m.y < 0 || m.y > heroCanvas.height) m.driftY *= -1;
   });
 }
 
-// ===== Hero: Draw massive particles =====
-
-function animate() {
-  offset += 0.15;
-  drawGrid();
-  drawMasses();
-  requestAnimationFrame(animate);
-}
-
-animate();
-  
-  
-// ===== Body: Subtle Particles Background =====
-const particlesCanvas = document.getElementById('particlesBG');
-const pctx = particlesCanvas.getContext('2d');
+/* ---------------- BODY: Subtle Particles ---------------- */
+const bodyCanvas = document.getElementById('particlesBG');
+const pctx = bodyCanvas.getContext('2d');
 let particles = [];
 const numParticles = 120;
 
-function resizeParticles(){ particlesCanvas.width=window.innerWidth; particlesCanvas.height=window.innerHeight; }
-window.addEventListener('resize', resizeParticles);
-resizeParticles();
+function resizeBodyCanvas() {
+  bodyCanvas.width = window.innerWidth;
+  bodyCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeBodyCanvas);
+resizeBodyCanvas();
 
-// Initialize particles
-for(let i=0;i<numParticles;i++){
+// Init body particles
+for (let i = 0; i < numParticles; i++) {
   particles.push({
-    x: Math.random()*particlesCanvas.width,
-    y: Math.random()*particlesCanvas.height,
-    size: 2 + Math.random()*3,
-    speedX: (Math.random()-0.5)*0.2,
-    speedY: (Math.random()-0.5)*0.2,
-    alpha: 0.2 + Math.random()*0.5
+    x: Math.random() * bodyCanvas.width,
+    y: Math.random() * bodyCanvas.height,
+    size: 2 + Math.random() * 3,
+    speedX: (Math.random() - 0.5) * 0.2,
+    speedY: (Math.random() - 0.5) * 0.2,
+    alpha: 0.2 + Math.random() * 0.5
   });
 }
 
-function drawParticles(){
-  pctx.clearRect(0,0,particlesCanvas.width,particlesCanvas.height);
-  particles.forEach(p=>{
+function drawParticles() {
+  pctx.clearRect(0, 0, bodyCanvas.width, bodyCanvas.height);
+  particles.forEach(p => {
     pctx.fillStyle = `rgba(102,252,241,${p.alpha})`;
     pctx.beginPath();
-    pctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    pctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
     pctx.fill();
+
     p.x += p.speedX;
     p.y += p.speedY;
-    if(p.x>particlesCanvas.width) p.x=0;
-    if(p.x<0) p.x=particlesCanvas.width;
-    if(p.y>particlesCanvas.height) p.y=0;
-    if(p.y<0) p.y=particlesCanvas.height;
+
+    if (p.x > bodyCanvas.width) p.x = 0;
+    if (p.x < 0) p.x = bodyCanvas.width;
+    if (p.y > bodyCanvas.height) p.y = 0;
+    if (p.y < 0) p.y = bodyCanvas.height;
   });
 }
 
-// ===== Animate Loop =====
-function animate(){
-  drawCausalGrid();
-  drawParticles();
+/* ---------------- ANIMATION LOOP ---------------- */
+function animate() {
+  offset += 0.15;
+  drawGrid();      // hero grid + masses
+  drawMasses();
+  drawParticles(); // body particles
   requestAnimationFrame(animate);
 }
+
 animate();
 
 </script>
