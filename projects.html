@@ -165,7 +165,6 @@
 
 <!-- Hero Section -->
 <section id="hero">
-  <canvas id="causalGrid"></canvas>
   <div class="hero-content">
     <h1 class="hero-name">Sarvesh Kore</h1>
     <h2 class="hero-tagline">My Project Page</h2>
@@ -313,99 +312,9 @@ function drawBody() {
   });
 }
 
-/* ---------------- HERO: Grid + Massive Particles ---------------- */
-const heroCanvas = document.getElementById('heroCanvas');
-const hctx = heroCanvas.getContext('2d');
-
-function resizeHero() {
-  heroCanvas.width = window.innerWidth;
-  heroCanvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeHero);
-resizeHero();
-
-const spacing = 90;
-const masses = [];
-const numMasses = 20;
-for (let i = 0; i < numMasses; i++) {
-  masses.push({
-    x: Math.random() * heroCanvas.width,
-    y: Math.random() * heroCanvas.height,
-    r: 3 + Math.random() * 4,
-    driftX: (Math.random() - 0.5) * 0.1,
-    driftY: (Math.random() - 0.5) * 0.1
-  });
-}
-
-// Mouse tracking
-const mouse = { x: -1000, y: -1000 };
-heroCanvas.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-heroCanvas.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
-
-// Warp function
-function warp(x, y) {
-  let dx = 0, dy = 0;
-  masses.forEach(m => {
-    const dist = Math.hypot(x - m.x, y - m.y);
-    const strength = Math.max(0, 120 - dist) / 120;
-    dx += (x - m.x) * strength * 0.08;
-    dy += (y - m.y) * strength * 0.08;
-  });
-  const distMouse = Math.hypot(x - mouse.x, y - mouse.y);
-  const mouseStrength = Math.max(0, 150 - distMouse) / 150;
-  dx += (x - mouse.x) * mouseStrength * 0.12;
-  dy += (y - mouse.y) * mouseStrength * 0.12;
-  return { x: x + dx, y: y + dy };
-}
-
-// Draw hero grid
-function drawHero() {
-  hctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
-
-  // Vertical lines
-  for (let x = 0; x <= heroCanvas.width; x += spacing) {
-    hctx.beginPath();
-    for (let y = 0; y <= heroCanvas.height; y += 20) {
-      const p = warp(x, y);
-      if (y === 0) hctx.moveTo(p.x, p.y);
-      else hctx.lineTo(p.x, p.y);
-    }
-    hctx.strokeStyle = 'rgba(102,252,241,0.12)';
-    hctx.lineWidth = 1;
-    hctx.stroke();
-  }
-
-  // Horizontal lines
-  for (let y = 0; y <= heroCanvas.height; y += spacing) {
-    hctx.beginPath();
-    for (let x = 0; x <= heroCanvas.width; x += 20) {
-      const p = warp(x, y);
-      if (x === 0) hctx.moveTo(p.x, p.y);
-      else hctx.lineTo(p.x, p.y);
-    }
-    hctx.strokeStyle = 'rgba(102,252,241,0.12)';
-    hctx.lineWidth = 1;
-    hctx.stroke();
-  }
-
-  // Massive particles
-  masses.forEach(m => {
-    hctx.fillStyle = 'rgba(102,252,241,0.8)';
-    hctx.beginPath();
-    hctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
-    hctx.fill();
-
-    m.x += m.driftX;
-    m.y += m.driftY;
-    if (m.x < 0 || m.x > heroCanvas.width) m.driftX *= -1;
-    if (m.y < 0 || m.y > heroCanvas.height) m.driftY *= -1;
-  });
-}
-
 /* ---------------- ANIMATE ---------------- */
 function animate() {
   drawBody();   // particles + moving lines
-  drawHero();   // hero grid + masses + mouse warp
   requestAnimationFrame(animate);
 }
 animate();
