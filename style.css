@@ -129,15 +129,6 @@ header nav .logo span {
   overflow: hidden;
 }
 
-#starfield {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* stars only in hero */
-  pointer-events: none;
-}
 
 .hero-content {
   position: relative;
@@ -196,7 +187,7 @@ header nav .logo span {
 }
 
 /* ---------------- Floating Shapes & Particles ---------------- */
-#shapes, #particles {
+#starfield, #shapes, #particles {
   position: fixed;
   top: 0;
   left: 0;
@@ -544,10 +535,6 @@ footer {
 
 
 
-/* ---------- General pointer-event fix for backgrounds ---------- */
-#hero, #starfield, #shapes, #particles {
-  pointer-events: none; /* prevent background from blocking clicks */
-}
 
 /* ---------- Hero section ---------- */
 #hero {
