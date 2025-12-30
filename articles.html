@@ -16,15 +16,46 @@
       padding: 0;
     }
 
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(11,12,16,0.95);
+      backdrop-filter: blur(6px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links li a {
+      color: #66fcf1;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .menu-toggle { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .menu-toggle span { display: block; width: 25px; height: 3px; background: #66fcf1; }
+
     /* Hero Section */
     #hero {
+      display: flex;
+      flex-direction: column;  /* stack vertically */
+      justify-content: center;
+      align-items: center;
       text-align: center;
       padding: 4rem 1rem;
-      position: relative;
       z-index: 1;
     }
     .hero-name { font-family: 'Orbitron', sans-serif; font-size: 3rem; color: #66fcf1; margin-bottom: 0.5rem; }
     .hero-tagline { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: #d1d1d1; margin-bottom: 1.5rem; }
+    .hero-desc { font-size: 1rem; color: #d1d1d1; max-width: 700px; }
 
     /* Search Bar */
     .search-container {
@@ -84,92 +115,222 @@
       font-weight: 500;
     }
 
+    /* Canvas Background */
+    #particlesBG {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    @media(max-width: 768px){
+      .nav-links { display: none; flex-direction: column; gap: 1rem; background: rgba(11,12,16,0.95); position: absolute; top: 100%; right: 0; width: 200px; padding: 1rem; }
+      .nav-links.active { display: flex; }
+      .menu-toggle { display: flex; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Hero Section -->
-  <section id="hero">
-    <h1 class="hero-name">Sarvesh Kore</h1>
-    <h2 class="hero-tagline">All Articles</h2>
-    <p>Browse all my writings and ideas — click any article to read it in full.</p>
-  </section>
+<!-- Background Canvas -->
+<canvas id="particlesBG"></canvas>
 
-  <!-- Search -->
-  <div class="search-container">
-    <input type="text" id="search" placeholder="Search articles...">
+<!-- Navbar -->
+<nav>
+  <div class="logo">
+    <a href="#hero" class="nav-logo">
+      <img src="Sarvesh-pfp-nobg.png" alt="Sarvesh Profile Picture" class="nav-pfp" style="width:35px; vertical-align:middle;">
+      <span>Sarvesh Kore</span>
+    </a>
+  </div>
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#hero">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="#articles">Articles</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section id="hero">
+  <h1 class="hero-name">Sarvesh Kore</h1>
+  <h2 class="hero-tagline">All Articles</h2>
+  <p class="hero-desc">Browse all my writings and ideas — click any article to read it in full.</p>
+</section>
+
+<!-- Search -->
+<div class="search-container">
+  <input type="text" id="search" placeholder="Search articles...">
+</div>
+
+<!-- Article Grid -->
+<div class="article-grid" id="articleGrid">
+  <div class="article-card" data-id="article1">
+    <h3>Is Our Universe Really An Isolated System?</h3>
+    <p class="article-tag">Physics · Cosmology · Philosophy</p>
+    <p class="article-excerpt">An inquiry into whether the universe can truly be treated as a closed system, examining energy conservation from local physics to cosmic scales.</p>
   </div>
 
-  <!-- Article Grid -->
-  <div class="article-grid" id="articleGrid">
-    <div class="article-card" data-id="article1">
-      <h3>Is Our Universe Really An Isolated System?</h3>
-      <p class="article-tag">Physics · Cosmology · Philosophy</p>
-      <p class="article-excerpt">An inquiry into whether the universe can truly be treated as a closed system, examining energy conservation from local physics to cosmic scales.</p>
-    </div>
-
-    <div class="article-card" data-id="article2">
-      <h3>The Law That Builds the Universe: Entropy</h3>
-      <p class="article-tag">Physics · Cosmology · Philosophy</p>
-      <p class="article-excerpt">An exploration of entropy not as mere disorder, but as the underlying principle shaping time, structure, and cosmic evolution.</p>
-    </div>
-
-    <!-- Add more article cards here -->
+  <div class="article-card" data-id="article2">
+    <h3>The Law That Builds the Universe: Entropy</h3>
+    <p class="article-tag">Physics · Cosmology · Philosophy</p>
+    <p class="article-excerpt">An exploration of entropy not as mere disorder, but as the underlying principle shaping time, structure, and cosmic evolution.</p>
   </div>
 
-  <!-- Full Article Views -->
-  <div class="full-article" id="article1">
-    <a class="back-btn">← Back</a>
-    <h2>Is Our Universe Really An Isolated System?</h2>
-    <p><em>Physics · Cosmology · Philosophy</em></p>
-    <p>Full article content goes here. You can paste your Medium content, HTML content, or summaries.</p>
-  </div>
+  <!-- Add more article cards here -->
+</div>
 
-  <div class="full-article" id="article2">
-    <a class="back-btn">← Back</a>
-    <h2>The Law That Builds the Universe: Entropy</h2>
-    <p><em>Physics · Cosmology · Philosophy</em></p>
-    <p>Full article content goes here. You can paste your Medium content, HTML content, or summaries.</p>
-  </div>
+<!-- Full Article Views -->
+<div class="full-article" id="article1">
+  <a class="back-btn">← Back</a>
+  <h2>Is Our Universe Really An Isolated System?</h2>
+  <p><em>Physics · Cosmology · Philosophy</em></p>
+  <p>Full article content goes here. You can paste your Medium content, HTML content, or summaries.</p>
+</div>
 
-  <script>
-    const searchInput = document.getElementById('search');
-    const articleGrid = document.getElementById('articleGrid');
-    const cards = document.querySelectorAll('.article-card');
-    const fullArticles = document.querySelectorAll('.full-article');
+<div class="full-article" id="article2">
+  <a class="back-btn">← Back</a>
+  <h2>The Law That Builds the Universe: Entropy</h2>
+  <p><em>Physics · Cosmology · Philosophy</em></p>
+  <p>Full article content goes here. You can paste your Medium content, HTML content, or summaries.</p>
+</div>
 
-    // Search/filter
-    searchInput.addEventListener('input', () => {
-      const query = searchInput.value.toLowerCase();
-      cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        card.style.display = text.includes(query) ? 'block' : 'none';
-      });
-    });
+<script>
+  // ===== Mobile Nav Toggle =====
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+  document.querySelectorAll('.nav-links a').forEach(link => 
+    link.addEventListener('click', () => navLinks.classList.remove('active'))
+  );
 
-    // Click on card -> show full article
+  // ===== Scroll to top on reload =====
+  window.onbeforeunload = () => window.scrollTo(0,0);
+
+  // Search/filter
+  const searchInput = document.getElementById('search');
+  const articleGrid = document.getElementById('articleGrid');
+  const cards = document.querySelectorAll('.article-card');
+  const fullArticles = document.querySelectorAll('.full-article');
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
     cards.forEach(card => {
-      card.addEventListener('click', () => {
-        const articleId = card.getAttribute('data-id');
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(query) ? 'block' : 'none';
+    });
+  });
 
-        // Hide grid + search
-        articleGrid.style.display = 'none';
-        document.querySelector('.search-container').style.display = 'none';
+  // Click on card -> show full article
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const articleId = card.getAttribute('data-id');
+      // Hide grid + search
+      articleGrid.style.display = 'none';
+      document.querySelector('.search-container').style.display = 'none';
+      // Show selected article
+      document.getElementById(articleId).style.display = 'block';
+    });
+  });
 
-        // Show selected article
-        document.getElementById(articleId).style.display = 'block';
-      });
+  // Back buttons
+  fullArticles.forEach(article => {
+    article.querySelector('.back-btn').addEventListener('click', () => {
+      article.style.display = 'none';
+      articleGrid.style.display = 'grid';
+      document.querySelector('.search-container').style.display = 'block';
+    });
+  });
+
+  /* ---------------- BODY: Lines + Particles ---------------- */
+  const bodyCanvas = document.getElementById('particlesBG');
+  const bctx = bodyCanvas.getContext('2d');
+
+  function resizeBody() {
+    bodyCanvas.width = window.innerWidth;
+    bodyCanvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeBody);
+  resizeBody();
+
+  // Particles
+  let particles = [];
+  const numParticles = 120;
+  for (let i = 0; i < numParticles; i++) {
+    particles.push({
+      x: Math.random() * bodyCanvas.width,
+      y: Math.random() * bodyCanvas.height,
+      size: 2 + Math.random() * 3,
+      speedX: (Math.random() - 0.5) * 0.2,
+      speedY: (Math.random() - 0.5) * 0.2,
+      alpha: 0.2 + Math.random() * 0.5
+    });
+  }
+
+  // Moving lines
+  let gridLines = [];
+  const numLines = 25;
+  for (let i = 0; i < numLines; i++) {
+    gridLines.push({
+      x: Math.random() * bodyCanvas.width,
+      y: Math.random() * bodyCanvas.height,
+      angle: Math.random() * Math.PI * 2,
+      speed: 0.2 + Math.random() * 0.3,
+      length: 250 + Math.random() * 150
+    });
+  }
+
+  function drawBody() {
+    bctx.clearRect(0, 0, bodyCanvas.width, bodyCanvas.height);
+
+    // Particles
+    particles.forEach(p => {
+      bctx.fillStyle = `rgba(102,252,241,${p.alpha})`;
+      bctx.beginPath();
+      bctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      bctx.fill();
+      p.x += p.speedX;
+      p.y += p.speedY;
+      if (p.x > bodyCanvas.width) p.x = 0;
+      if (p.x < 0) p.x = bodyCanvas.width;
+      if (p.y > bodyCanvas.height) p.y = 0;
+      if (p.y < 0) p.y = bodyCanvas.height;
     });
 
-    // Back buttons
-    fullArticles.forEach(article => {
-      article.querySelector('.back-btn').addEventListener('click', () => {
-        article.style.display = 'none';
-        articleGrid.style.display = 'grid';
-        document.querySelector('.search-container').style.display = 'block';
-      });
+    // Lines
+    gridLines.forEach(line => {
+      const x1 = line.x;
+      const y1 = line.y;
+      const x2 = x1 + line.length * Math.cos(line.angle);
+      const y2 = y1 + line.length * Math.sin(line.angle);
+      bctx.beginPath();
+      bctx.moveTo(x1, y1);
+      bctx.lineTo(x2, y2);
+      bctx.strokeStyle = 'rgba(102,252,241,0.35)';
+      bctx.lineWidth = 1.2;
+      bctx.stroke();
+      line.x += Math.cos(line.angle) * line.speed;
+      line.y += Math.sin(line.angle) * line.speed;
+      if (line.x > bodyCanvas.width) line.x = 0;
+      if (line.x < 0) line.x = bodyCanvas.width;
+      if (line.y > bodyCanvas.height) line.y = 0;
+      if (line.y < 0) line.y = bodyCanvas.height;
     });
-  </script>
+  }
+
+  function animate() {
+    drawBody();
+    requestAnimationFrame(animate);
+  }
+  animate();
+</script>
 
 </body>
 </html>
