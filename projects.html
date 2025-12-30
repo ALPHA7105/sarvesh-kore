@@ -247,18 +247,19 @@ const spacing = 90;
 
 // Massive particles
 const masses = [];
-for (let i = 0; i < 5; i++) {
+const numMasses = 12; // increase number
+for (let i = 0; i < numMasses; i++) {
   masses.push({
     x: Math.random() * heroCanvas.width,
     y: Math.random() * heroCanvas.height,
     r: 4 + Math.random() * 3,
-    driftX: (Math.random() - 0.5) * 0.1,
-    driftY: (Math.random() - 0.5) * 0.1
+    driftX: (Math.random() - 0.5) * 0.15,
+    driftY: (Math.random() - 0.5) * 0.15
   });
 }
 
 // Mouse tracking
-const mouse = { x: -1000, y: -1000 }; // default off-screen
+const mouse = { x: -1000, y: -1000 };
 heroCanvas.addEventListener('mousemove', (e) => {
   mouse.x = e.clientX;
   mouse.y = e.clientY;
@@ -272,7 +273,7 @@ heroCanvas.addEventListener('mouseleave', () => {
 function warp(x, y) {
   let dx = 0, dy = 0;
 
-  // Massive particles
+  // Warp from massive particles
   masses.forEach(m => {
     const dist = Math.hypot(x - m.x, y - m.y);
     const strength = Math.max(0, 120 - dist) / 120;
@@ -280,7 +281,7 @@ function warp(x, y) {
     dy += (y - m.y) * strength * 0.15;
   });
 
-  // Mouse warp
+  // Warp from mouse
   const distMouse = Math.hypot(x - mouse.x, y - mouse.y);
   const mouseStrength = Math.max(0, 150 - distMouse) / 150;
   dx += (x - mouse.x) * mouseStrength * 0.25;
@@ -290,7 +291,7 @@ function warp(x, y) {
 }
 
 // Draw stationary grid + masses
-function drawGridAndMasses() {
+function drawHero() {
   hctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
 
   hctx.strokeStyle = 'rgba(102,252,241,0.12)';
@@ -330,14 +331,6 @@ function drawGridAndMasses() {
     if (m.y < 0 || m.y > heroCanvas.height) m.driftY *= -1;
   });
 }
-
-// Animation loop
-function animateHero() {
-  drawGridAndMasses();
-  requestAnimationFrame(animateHero);
-}
-animateHero();
-  
 
 /* ---------------- BODY: Subtle Particles ---------------- */
 const bodyCanvas = document.getElementById('particlesBG');
@@ -382,14 +375,14 @@ function drawParticles() {
   });
 }
 
-// Animation loop
+/* ---------------- ANIMATION LOOP ---------------- */
 function animate() {
-  offset += 0.15;
-  drawParticles(); // body particles
+  drawParticles();  // body background stays
+  drawHero();       // hero grid + masses
   requestAnimationFrame(animate);
 }
-
 animate();
+
 
 </script>
 </body>
