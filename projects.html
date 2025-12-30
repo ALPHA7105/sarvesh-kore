@@ -270,7 +270,7 @@ for (let i = 0; i < numLines; i++) {
   });
 }
 
-// ---- Draw everything ----
+// ---- Draw body ----
 function drawBody() {
   bctx.clearRect(0, 0, bodyCanvas.width, bodyCanvas.height);
 
@@ -280,8 +280,10 @@ function drawBody() {
     bctx.beginPath();
     bctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
     bctx.fill();
+
     p.x += p.speedX;
     p.y += p.speedY;
+
     if (p.x > bodyCanvas.width) p.x = 0;
     if (p.x < 0) p.x = bodyCanvas.width;
     if (p.y > bodyCanvas.height) p.y = 0;
@@ -297,7 +299,7 @@ function drawBody() {
     bctx.beginPath();
     bctx.moveTo(x1, y1);
     bctx.lineTo(x2, y2);
-    bctx.strokeStyle = 'rgba(102,252,241,0.4)'; // brighter
+    bctx.strokeStyle = 'rgba(102,252,241,0.35)';
     bctx.lineWidth = 1.2;
     bctx.stroke();
 
@@ -356,7 +358,7 @@ function warp(x, y) {
   return { x: x + dx, y: y + dy };
 }
 
-// Draw stationary grid + masses
+// Draw hero grid
 function drawHero() {
   hctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
 
@@ -402,11 +404,12 @@ function drawHero() {
 
 /* ---------------- ANIMATE ---------------- */
 function animate() {
-  drawBody();  // moving lines + particles
-  drawHero();  // hero grid + particles + mouse warp
+  drawBody();   // particles + moving lines
+  drawHero();   // hero grid + masses + mouse warp
   requestAnimationFrame(animate);
 }
 animate();
+
 
 
 </script>
