@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarvesh Kore | Articles</title>
+  <link rel="icon" href="Sarvesh-pfp-nobg.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #0b0c10;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Hero Section */
+    #hero {
+      text-align: center;
+      padding: 4rem 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-name { font-family: 'Orbitron', sans-serif; font-size: 3rem; color: #66fcf1; margin-bottom: 0.5rem; }
+    .hero-tagline { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: #d1d1d1; margin-bottom: 1.5rem; }
+
+    /* Search Bar */
+    .search-container {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    #search {
+      padding: 0.8rem 1rem;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    /* Article Grid */
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 0 2rem 4rem 2rem;
+    }
+    .article-card {
+      background: rgba(11,12,16,0.85);
+      backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .article-card:hover { transform: translateY(-5px); }
+    .article-card h3 { margin-top: 0; font-family: 'Orbitron', sans-serif; color: #66fcf1; }
+    .article-tag { font-size: 0.9rem; color: #45a29e; margin-bottom: 0.5rem; }
+    .article-excerpt { font-size: 1rem; line-height: 1.5; }
+
+    /* Full Article View */
+    .full-article {
+      display: none;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto 4rem auto;
+      background: rgba(11,12,16,0.9);
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+    }
+    .full-article h2 { color: #66fcf1; font-family: 'Orbitron', sans-serif; }
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      background: #66fcf1;
+      color: #0b0c10;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <h1 class="hero-name">Sarvesh Kore</h1>
+    <h2 class="hero-tagline">All Articles</h2>
+    <p>Browse all my writings and ideas — click any article to read it in full.</p>
+  </section>
+
+  <!-- Search -->
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Search articles...">
+  </div>
+
+  <!-- Article Grid -->
+  <div class="article-grid" id="articleGrid">
+    <div class="article-card" data-id="article1">
+      <h3>Is Our Universe Really An Isolated System?</h3>
+      <p class="article-tag">Physics · Cosmology · Philosophy</p>
+      <p class="article-excerpt">An inquiry into whether the universe can truly be treated as a closed system, examining energy conservation from local physics to cosmic scales.</p>
+    </div>
+
+    <div class="article-card" data-id="article2">
+      <h3>The Law That Builds the Universe: Entropy</h3>
+      <p class="article-tag">Physics · Cosmology · Philosophy</p>
+      <p class="article-excerpt">An exploration of entropy not as mere disorder, but as the underlying principle shaping time, structure, and cosmic evolution.</p>
+    </div>
+
+    <!-- Add more article cards here -->
+  </div>
+
+  <!-- Full Article Views -->
+  <div class="full-article" id="article1">
+    <a class="back-btn">← Back</a>
+    <h2>Is Our Universe Really An Isolated System?</h2>
+    <p><em>Physics · Cosmology · Philosophy</em></p>
+    <p>Full article content goes here. You can paste your Medium content, HTML content, or summaries.</p>
+  </div>
+
+  <div class="full-article" id="article2">
+    <a class="back-btn">← Back</a>
+    <h2>The Law That Builds the Universe: Entropy</h2>
+    <p><em>Physics · Cosmology · Philosophy</em></p>
+    <p>Full article content goes here. You can paste your Medium content, HTML content, or summaries.</p>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('search');
+    const articleGrid = document.getElementById('articleGrid');
+    const cards = document.querySelectorAll('.article-card');
+    const fullArticles = document.querySelectorAll('.full-article');
+
+    // Search/filter
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
+
+    // Click on card -> show full article
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const articleId = card.getAttribute('data-id');
+
+        // Hide grid + search
+        articleGrid.style.display = 'none';
+        document.querySelector('.search-container').style.display = 'none';
+
+        // Show selected article
+        document.getElementById(articleId).style.display = 'block';
+      });
+    });
+
+    // Back buttons
+    fullArticles.forEach(article => {
+      article.querySelector('.back-btn').addEventListener('click', () => {
+        article.style.display = 'none';
+        articleGrid.style.display = 'grid';
+        document.querySelector('.search-container').style.display = 'block';
+      });
+    });
+  </script>
+
+</body>
+</html>
