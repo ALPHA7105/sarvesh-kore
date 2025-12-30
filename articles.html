@@ -316,33 +316,28 @@
   // ===== Scroll to top on reload =====
   window.onbeforeunload = () => window.scrollTo(0,0);
 
-  // Search/filter
+  // Search filter + show/hide articles
   const searchInput = document.getElementById('search');
   const articleGrid = document.getElementById('articleGrid');
   const cards = document.querySelectorAll('.article-card');
   const fullArticles = document.querySelectorAll('.full-article');
 
   searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase();
+    const q = searchInput.value.toLowerCase();
     cards.forEach(card => {
-      const text = card.textContent.toLowerCase();
-      card.style.display = text.includes(query) ? 'block' : 'none';
+      card.style.display = card.textContent.toLowerCase().includes(q) ? 'block' : 'none';
     });
   });
 
-  // Click on card -> show full article
   cards.forEach(card => {
     card.addEventListener('click', () => {
-      const articleId = card.getAttribute('data-id');
-      // Hide grid + search
+      const id = card.getAttribute('data-id');
       articleGrid.style.display = 'none';
       document.querySelector('.search-container').style.display = 'none';
-      // Show selected article
-      document.getElementById(articleId).style.display = 'block';
+      document.getElementById(id).style.display = 'block';
     });
   });
 
-  // Back buttons
   fullArticles.forEach(article => {
     article.querySelector('.back-btn').addEventListener('click', () => {
       article.style.display = 'none';
