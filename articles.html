@@ -19,21 +19,15 @@
     /* Hero Section */
     #hero {
       position: relative;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      height: 100vh;
       padding: 2rem;
-      z-index: 1;
       color: #fff;
       overflow: hidden;
-    }
-
-    .hero {
-      min-height: 100vh;
-      display: flex;
     }
 
     .hero-content {
@@ -135,7 +129,8 @@
         font-family: "Georgia", serif;
         line-height: 1.8; /* more space between lines */
         color: #ffffff; /* white text for dark background */
-        display: flex
+        display: none;
+        flex-direction: column;
     }
 
     /* Article main title */
@@ -182,6 +177,7 @@
 
     .full-article .back-btn:hover {
         text-decoration: none;
+    }
 
     /* Canvas Background */
     #particlesBG {
@@ -446,7 +442,7 @@
   searchInput.addEventListener('input', () => {
     const q = searchInput.value.toLowerCase();
     cards.forEach(card => {
-      card.style.display = card.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
     });
   });
 
@@ -462,7 +458,7 @@
   fullArticles.forEach(article => {
     article.querySelector('.back-btn').addEventListener('click', () => {
       article.style.display = 'none';
-      articleGrid.style.display = 'grid';
+      articleGrid.style.display = '';
       document.querySelector('.search-container').style.display = 'block';
     });
   });
