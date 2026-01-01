@@ -293,6 +293,17 @@ section p {
         transform 0.15s ease;
 }
 
+.updates-link:hover {
+    background: rgba(102, 252, 241, 0.1);
+    box-shadow: 0 0 14px rgba(102, 252, 241, 0.35);
+    transform: translateY(-1px);
+}
+
+.updates-link:active {
+    transform: translateY(0);
+    box-shadow: 0 0 6px rgba(102, 252, 241, 0.25);
+}
+
 /* ---------------- Projects ---------------- */
 .project-grid {
   display: grid;
