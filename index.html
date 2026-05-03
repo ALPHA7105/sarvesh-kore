@@ -33,9 +33,9 @@
       <li><a href="#about">About</a></li>
       <li><a href="#updates">Updates</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#solar-system">Solar System</a></li>
       <li><a href="#com">CoM</a></li>
       <li><a href="#medium">Medium</a></li>
+      <li><a href="#apod">APOD</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -144,19 +144,6 @@
   </div>
 </section>
 
-<!-- Interactive Solar System Section -->
-<section id="solar-system" class="reveal">
-  <h2>Explore the Solar System</h2>
-  <div class="iframe-container">
-    <iframe 
-      src="https://eyes.nasa.gov/apps/solar-system/#/home" 
-      allowfullscreen 
-      loading="lazy"
-      title="NASA Eyes on the Solar System">
-    </iframe>
-  </div>
-</section>
-
 <!-- CoM Section -->
 <section id="com">
   <h2>Collegium of Minds (CoM)</h2>
@@ -185,6 +172,27 @@
       medium.com/@sarveshkore
     </a>.
   </p>
+</section>
+
+<!-- APOD -->
+<section id="apod" class="reveal">
+  <h2>Astronomy Picture of the Day</h2>
+
+  <div class="apod-container">
+    
+    <!-- Image -->
+    <div class="apod-image">
+      <img id="apod-img" src="" alt="NASA APOD">
+    </div>
+
+    <!-- Text -->
+    <div class="apod-text">
+      <h3 id="apod-title">Loading...</h3>
+      <p id="apod-date"></p>
+      <p id="apod-desc"></p>
+    </div>
+
+  </div>
 </section>
 
 <!-- Contact Section -->
@@ -383,6 +391,35 @@ window.addEventListener('load', () => {
     history.replaceState(null, '', window.location.pathname + window.location.search);
   }
 });
+
+ 
+// APOD
+async function loadAPOD() {
+  const url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    // Sometimes APOD is a video (YouTube), handle that
+    if (data.media_type === "image") {
+      document.getElementById("apod-img").src = data.url;
+    } else {
+      document.getElementById("apod-img").style.display = "none";
+    }
+
+    document.getElementById("apod-title").textContent = data.title;
+    document.getElementById("apod-date").textContent = data.date;
+    document.getElementById("apod-desc").textContent = data.explanation;
+
+  } catch (err) {
+    console.error("Failed to load APOD:", err);
+  }
+}
+
+loadAPOD();
+
+ 
 
 // ---------- Mobile Nav Toggle ----------
 const menuToggle = document.getElementById('menuToggle');
