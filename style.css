@@ -408,6 +408,8 @@ section p {
   flex: 1 1 400px;
   max-width: 600px;
   text-align: left;
+  background: red;
+  color: white;
 }
 
 .apod-text h3 {
