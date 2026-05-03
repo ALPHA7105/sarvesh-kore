@@ -375,34 +375,48 @@ section p {
     inset 0 0 0 1px rgba(255, 255, 255, 0.35);
 }
 
-/* ---------------- Eyes on the Solar System --------------*/
+/* ---------------- APOD --------------*/
 
-#solar-system {
-  padding: 60px 20px;
-  text-align: center;
-  position: relative;
-  z-index: 2;
+.apod-container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* fallback for small screens */
 }
 
-.iframe-container {
-  position: relative;
-  width: 100%;
-  max-width: 1000px; /* Limits width on large screens */
-  margin: 0 auto;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
-  border: 2px solid #66fcf1; /* Matches your glowing theme */
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(102, 252, 241, 0.2);
+/* IMAGE SIDE */
+.apod-image {
+  flex: 1 1 400px;
+  max-width: 500px;
+  height: 60vh; /* controls vertical size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.iframe-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
+.apod-image img {
   width: 100%;
   height: 100%;
-  border: none;
+  object-fit: contain; /* THIS is the magic */
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(102,252,241,0.2);
+}
+
+/* TEXT SIDE */
+.apod-text {
+  flex: 1 1 400px;
+  max-width: 600px;
+  text-align: left;
+}
+
+.apod-text h3 {
+  color: #66fcf1;
+  margin-bottom: 0.5rem;
+}
+
+.apod-text p {
+  margin-bottom: 1rem;
 }
 
 
